@@ -13,6 +13,14 @@ class Alarm: NSObject, NSCoding {
 	private let NameKey = "name"
 	private let EnabledKey = "enabled"
 	private let UUIDKey = "UUID"
+    var repeatAlarm = false
+    var isSunOn:Bool = false
+    var isMonOn:Bool = false
+    var isTueOn:Bool = false
+    var isWedOn:Bool = false
+    var isThuOn:Bool = false
+    var isFriOn:Bool = false
+    var isSatOn:Bool = false
 	
 	init(fireTimeFromMidnight: TimeInterval, name: String, enabled: Bool = true, uuid: String = UUID().uuidString) {
 		self.fireTimeFromMidnight = fireTimeFromMidnight

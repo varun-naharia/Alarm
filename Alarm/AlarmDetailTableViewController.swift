@@ -20,17 +20,39 @@ class AlarmDetailTableViewController: UITableViewController, AlarmScheduler {
     @IBAction func saveButtonTapped(_ sender: Any) {
         guard let title = alarmTitleTextField.text,
             let thisMorningAtMidnight = DateHelper.thisMorningAtMidnight else { return }
-        let timeIntervalSinceMidnight = alarmDatePicker.date.timeIntervalSince(thisMorningAtMidnight)
-        if let alarm = alarm {
-            AlarmController.shared.update(alarm: alarm, fireTimeFromMidnight: timeIntervalSinceMidnight, name: title)
-            cancelUserNotifications(for: alarm)
-            scheduleUserNotifications(for: alarm)
-        } else {
-            let alarm = AlarmController.shared.addAlarm(fireTimeFromMidnight: timeIntervalSinceMidnight, name: title)
-            self.alarm = alarm
-            scheduleUserNotifications(for: alarm)
-        }
+            let timeIntervalSinceMidnight = alarmDatePicker.date.timeIntervalSince(thisMorningAtMidnight)
+            if let alarm = alarm {
+                AlarmController.shared.update(alarm: alarm, fireTimeFromMidnight: timeIntervalSinceMidnight, name: title)
+                alarm.isSunOn = isSunOn
+                alarm.isMonOn = isMonOn
+                alarm.isTueOn = isTueOn
+                alarm.isWedOn = isWedOn
+                alarm.isThuOn = isThuOn
+                alarm.isFriOn = isFriOn
+                alarm.isSatOn = isSatOn
+                alarm.repeatAlarm = isRepeatOn
+                cancelUserNotifications(for: alarm)
+                scheduleUserNotifications(for: alarm)
+            } else {
+                let alarm = AlarmController.shared.addAlarm(fireTimeFromMidnight: timeIntervalSinceMidnight, name: title)
+                alarm.repeatAlarm = isRepeatOn
+                alarm.isSunOn = isSunOn
+                alarm.isMonOn = isMonOn
+                alarm.isTueOn = isTueOn
+                alarm.isWedOn = isWedOn
+                alarm.isThuOn = isThuOn
+                alarm.isFriOn = isFriOn
+                alarm.isSatOn = isSatOn
+                self.alarm = alarm
+                scheduleUserNotifications(for: alarm)
+            }
+        
+        
         let _ = navigationController?.popViewController(animated: true)
+    }
+    
+    func addAlarmFor(date:Date, title:String, thisMorningAtMidnight:Date, repeatAlarm:Bool) {
+       
     }
     
     @IBAction func enableButtonTapped(_ sender: Any) {
@@ -84,4 +106,61 @@ class AlarmDetailTableViewController: UITableViewController, AlarmScheduler {
     @IBOutlet weak var alarmDatePicker: UIDatePicker!
     @IBOutlet weak var alarmTitleTextField: UITextField!
     @IBOutlet weak var enableButton: UIButton!
+    @IBOutlet weak var sunButton: UIButton!
+    @IBOutlet weak var monButton: UIButton!
+    @IBOutlet weak var tueButton: UIButton!
+    @IBOutlet weak var wedButton: UIButton!
+    @IBOutlet weak var thuButton: UIButton!
+    @IBOutlet weak var friButton: UIButton!
+    @IBOutlet weak var satButton: UIButton!
+    
+    var isSunOn:Bool = false
+    var isMonOn:Bool = false
+    var isTueOn:Bool = false
+    var isWedOn:Bool = false
+    var isThuOn:Bool = false
+    var isFriOn:Bool = false
+    var isSatOn:Bool = false
+    var isRepeatOn:Bool = false
+    
+    @IBAction func sunButtonTapped(_ sender: Any) {
+        isSunOn = !isSunOn
+        sunButton.backgroundColor = isSunOn ? UIColor.blue : UIColor.red
+    }
+    
+    @IBAction func monButtonTapped(_ sender: Any) {
+        isMonOn = !isMonOn
+        monButton.backgroundColor = isMonOn ? UIColor.blue : UIColor.red
+    }
+    
+    @IBAction func tueButtonTapped(_ sender: Any) {
+        isTueOn = !isTueOn
+        tueButton.backgroundColor = isTueOn ? UIColor.blue : UIColor.red
+    }
+    
+    @IBAction func wedButtonTapped(_ sender: Any) {
+        isWedOn = !isWedOn
+        wedButton.backgroundColor = isWedOn ? UIColor.blue : UIColor.red
+    }
+    
+    @IBAction func thuButtonTapped(_ sender: Any) {
+        isThuOn = !isThuOn
+        thuButton.backgroundColor = isThuOn ? UIColor.blue : UIColor.red
+    }
+    
+    @IBAction func friButtonTapped(_ sender: Any) {
+        isFriOn = !isFriOn
+        friButton.backgroundColor = isFriOn ? UIColor.blue : UIColor.red
+    }
+    
+    @IBAction func satButtonTapped(_ sender: Any) {
+        isSatOn = !isSatOn
+        satButton.backgroundColor = isSatOn ? UIColor.blue : UIColor.red
+    }
+    
+    @IBAction func repeatAction(_ sender: UISwitch) {
+            isRepeatOn = sender.isOn
+    }
+    
+    
 }
