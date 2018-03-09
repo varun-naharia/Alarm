@@ -90,6 +90,24 @@ class AlarmDetailTableViewController: UITableViewController, AlarmScheduler {
             enableButton.backgroundColor = .gray
         }
         
+        isSunOn = alarm.isSunOn
+        sunButton.backgroundColor = isSunOn ? UIColor.blue : UIColor.red
+        isMonOn = alarm.isMonOn
+        monButton.backgroundColor = isMonOn ? UIColor.blue : UIColor.red
+        isTueOn = alarm.isTueOn
+        tueButton.backgroundColor = isTueOn ? UIColor.blue : UIColor.red
+        isWedOn = alarm.isWedOn
+        wedButton.backgroundColor = isWedOn ? UIColor.blue : UIColor.red
+        isThuOn = alarm.isThuOn
+        thuButton.backgroundColor = isThuOn ? UIColor.blue : UIColor.red
+        isFriOn = alarm.isFriOn
+        friButton.backgroundColor = isFriOn ? UIColor.blue : UIColor.red
+        isSatOn = alarm.isSatOn
+        satButton.backgroundColor = isSatOn ? UIColor.blue : UIColor.red
+        isRepeatOn = alarm.repeatAlarm
+        
+        
+        
         self.title = alarm.name
     }
     
