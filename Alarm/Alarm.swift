@@ -13,7 +13,7 @@ class Alarm: NSObject, NSCoding {
 	private let NameKey = "name"
 	private let EnabledKey = "enabled"
 	private let UUIDKey = "UUID"
-    var repeatAlarm = false
+    var repeatAlarm:Bool = false
     var isSunOn:Bool = false
     var isMonOn:Bool = false
     var isTueOn:Bool = false
@@ -40,6 +40,14 @@ class Alarm: NSObject, NSCoding {
 		self.name = name
 		self.enabled = aDecoder.decodeBool(forKey: EnabledKey)
 		self.uuid = uuid
+        repeatAlarm = aDecoder.decodeBool(forKey: "repeatAlarm")
+        isSunOn = aDecoder.decodeBool(forKey: "isSunOn")
+        isMonOn = aDecoder.decodeBool(forKey: "isMonOn")
+        isTueOn = aDecoder.decodeBool(forKey: "isTueOn")
+        isWedOn = aDecoder.decodeBool(forKey: "isWedOn")
+        isThuOn = aDecoder.decodeBool(forKey: "isThuOn")
+        isFriOn = aDecoder.decodeBool(forKey: "isFriOn")
+        isSatOn = aDecoder.decodeBool(forKey: "isSatOn")
 	}
 	
 	func encode(with aCoder: NSCoder) {
@@ -47,6 +55,15 @@ class Alarm: NSObject, NSCoding {
 		aCoder.encode(name, forKey: NameKey)
 		aCoder.encode(enabled, forKey: EnabledKey)
 		aCoder.encode(uuid, forKey: UUIDKey)
+        
+        aCoder.encode(isSunOn, forKey: "isSunOn")
+        aCoder.encode(isMonOn, forKey: "isMonOn")
+        aCoder.encode(isTueOn, forKey: "isTueOn")
+        aCoder.encode(isWedOn, forKey: "isWedOn")
+        aCoder.encode(isThuOn, forKey: "isThuOn")
+        aCoder.encode(isFriOn, forKey: "isFriOn")
+        aCoder.encode(isSatOn, forKey: "isSatOn")
+        aCoder.encode(repeatAlarm, forKey: "repeatAlarm")
 	}
  
 	// MARK: Properties

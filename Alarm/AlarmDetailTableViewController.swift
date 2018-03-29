@@ -22,27 +22,11 @@ class AlarmDetailTableViewController: UITableViewController, AlarmScheduler {
             let thisMorningAtMidnight = DateHelper.thisMorningAtMidnight else { return }
             let timeIntervalSinceMidnight = alarmDatePicker.date.timeIntervalSince(thisMorningAtMidnight)
             if let alarm = alarm {
-                AlarmController.shared.update(alarm: alarm, fireTimeFromMidnight: timeIntervalSinceMidnight, name: title)
-                alarm.isSunOn = isSunOn
-                alarm.isMonOn = isMonOn
-                alarm.isTueOn = isTueOn
-                alarm.isWedOn = isWedOn
-                alarm.isThuOn = isThuOn
-                alarm.isFriOn = isFriOn
-                alarm.isSatOn = isSatOn
-                alarm.repeatAlarm = isRepeatOn
+                AlarmController.shared.update(alarm: alarm, fireTimeFromMidnight: timeIntervalSinceMidnight, name: title, isRepeatOn: isRepeatOn, isSunOn: isSunOn, isMonOn: isMonOn, isTueOn: isTueOn, isWedOn: isWedOn, isThuOn: isThuOn, isFriOn: isFriOn, isSatOn: isSatOn)
                 cancelUserNotifications(for: alarm)
                 scheduleUserNotifications(for: alarm)
             } else {
-                let alarm = AlarmController.shared.addAlarm(fireTimeFromMidnight: timeIntervalSinceMidnight, name: title)
-                alarm.repeatAlarm = isRepeatOn
-                alarm.isSunOn = isSunOn
-                alarm.isMonOn = isMonOn
-                alarm.isTueOn = isTueOn
-                alarm.isWedOn = isWedOn
-                alarm.isThuOn = isThuOn
-                alarm.isFriOn = isFriOn
-                alarm.isSatOn = isSatOn
+                let alarm = AlarmController.shared.addAlarm(fireTimeFromMidnight: timeIntervalSinceMidnight, name: title, isRepeatOn: isRepeatOn, isSunOn: isSunOn, isMonOn: isMonOn, isTueOn: isTueOn, isWedOn: isWedOn, isThuOn: isThuOn, isFriOn: isFriOn, isSatOn: isSatOn)
                 self.alarm = alarm
                 scheduleUserNotifications(for: alarm)
             }

@@ -19,16 +19,32 @@ class AlarmController {
     
     // MARK: Model Controller Methods
     
-    func addAlarm(fireTimeFromMidnight: TimeInterval, name: String) -> Alarm {
+    func addAlarm(fireTimeFromMidnight: TimeInterval, name: String, isRepeatOn:Bool, isSunOn:Bool, isMonOn:Bool, isTueOn:Bool, isWedOn:Bool, isThuOn:Bool, isFriOn:Bool, isSatOn:Bool) -> Alarm {
         let alarm = Alarm(fireTimeFromMidnight: fireTimeFromMidnight, name: name)
+        alarm.isSunOn = isSunOn
+        alarm.isMonOn = isMonOn
+        alarm.isTueOn = isTueOn
+        alarm.isWedOn = isWedOn
+        alarm.isThuOn = isThuOn
+        alarm.isFriOn = isFriOn
+        alarm.isSatOn = isSatOn
+        alarm.repeatAlarm = isRepeatOn
         alarms.append(alarm)
         saveToPersistentStorage()
         return alarm
     }
     
-    func update(alarm: Alarm, fireTimeFromMidnight: TimeInterval, name: String) {
+    func update(alarm: Alarm, fireTimeFromMidnight: TimeInterval, name: String, isRepeatOn:Bool, isSunOn:Bool, isMonOn:Bool, isTueOn:Bool, isWedOn:Bool, isThuOn:Bool, isFriOn:Bool, isSatOn:Bool) {
         alarm.fireTimeFromMidnight = fireTimeFromMidnight
         alarm.name = name
+        alarm.isSunOn = isSunOn
+        alarm.isMonOn = isMonOn
+        alarm.isTueOn = isTueOn
+        alarm.isWedOn = isWedOn
+        alarm.isThuOn = isThuOn
+        alarm.isFriOn = isFriOn
+        alarm.isSatOn = isSatOn
+        alarm.repeatAlarm = isRepeatOn
         saveToPersistentStorage()
     }
     
@@ -92,7 +108,7 @@ extension AlarmScheduler {
            // Sunday
 
             let comingSunday =  findNext("Sunday", afterDate: fireDate)
-            let triggerDate = Calendar.current.dateComponents([.hour, .minute, .second], from: comingSunday!)
+            let triggerDate = Calendar.current.dateComponents([ .year, .month, .weekday, .hour, .minute, .second], from: comingSunday!)
             let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: alarm.repeatAlarm)
 
             let request = UNNotificationRequest(identifier: "\(alarm.uuid)0", content: notificationContent, trigger: trigger)
@@ -108,9 +124,9 @@ extension AlarmScheduler {
             // Monday
 
             let comingMonday =  findNext("Monday", afterDate: fireDate)
-            let triggerDate = Calendar.current.dateComponents([.hour, .minute, .second], from: comingMonday!)
+            let triggerDate = Calendar.current.dateComponents([ .year, .month, .weekday, .hour, .minute, .second], from: comingMonday!)
             let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: alarm.repeatAlarm)
-
+            
             let request = UNNotificationRequest(identifier: "\(alarm.uuid)1", content: notificationContent, trigger: trigger)
             UNUserNotificationCenter.current().add(request) { (error) in
                 if let error = error {
@@ -124,7 +140,7 @@ extension AlarmScheduler {
             // Tuesday
 
             let comingTuesday =  findNext("Tuesday", afterDate: fireDate)
-            let triggerDate = Calendar.current.dateComponents([.hour, .minute, .second], from: comingTuesday!)
+            let triggerDate = Calendar.current.dateComponents([ .year, .month, .weekday, .hour, .minute, .second], from: comingTuesday!)
             let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: alarm.repeatAlarm)
 
             let request = UNNotificationRequest(identifier: "\(alarm.uuid)2", content: notificationContent, trigger: trigger)
@@ -140,7 +156,7 @@ extension AlarmScheduler {
             // Wednesday
 
             let comingWednesday =  findNext("Wednesday", afterDate: fireDate)
-            let triggerDate = Calendar.current.dateComponents([.hour, .minute, .second], from: comingWednesday!)
+            let triggerDate = Calendar.current.dateComponents([ .year, .month, .weekday, .hour, .minute, .second], from: comingWednesday!)
             let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: alarm.repeatAlarm)
 
             let request = UNNotificationRequest(identifier: "\(alarm.uuid)3", content: notificationContent, trigger: trigger)
@@ -155,8 +171,8 @@ extension AlarmScheduler {
         {
             // Thrusday
 
-            let comingThursday =  findNext("Thrusday", afterDate: fireDate)
-            let triggerDate = Calendar.current.dateComponents([.hour, .minute, .second], from: comingThursday!)
+            let comingThursday =  findNext("Thursday", afterDate: fireDate)
+            let triggerDate = Calendar.current.dateComponents([ .year, .month, .weekday, .hour, .minute, .second], from: comingThursday!)
             let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: alarm.repeatAlarm)
 
             let request = UNNotificationRequest(identifier: "\(alarm.uuid)4", content: notificationContent, trigger: trigger)
@@ -172,7 +188,7 @@ extension AlarmScheduler {
             // Friday
             
             let comingFriday =  findNext("Friday", afterDate: fireDate)
-            let triggerDate = Calendar.current.dateComponents([.hour, .minute, .second], from: comingFriday!)
+            let triggerDate = Calendar.current.dateComponents([ .year, .month, .weekday, .hour, .minute, .second], from: comingFriday!)
             let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: alarm.repeatAlarm)
             
             let request = UNNotificationRequest(identifier: "\(alarm.uuid)5", content: notificationContent, trigger: trigger)
@@ -188,7 +204,7 @@ extension AlarmScheduler {
              // Saturday
 
             let comingSaturday = findNext("Saturday", afterDate: fireDate)
-            let triggerDate = Calendar.current.dateComponents([.hour, .minute, .second], from: comingSaturday!)
+            let triggerDate = Calendar.current.dateComponents([ .year, .month, .weekday, .hour, .minute, .second], from: comingSaturday!)
             let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: alarm.repeatAlarm)
 
             let request = UNNotificationRequest(identifier: "\(alarm.uuid)6", content: notificationContent, trigger: trigger)
@@ -209,7 +225,9 @@ extension AlarmScheduler {
     func findNext(_ day: String, afterDate date: Date) -> Date? {
         
         var calendar = Calendar.current
-        calendar.locale = Locale(identifier: "en_US_POSIX")
+        calendar.timeZone = .current
+
+//        calendar.locale = Locale(identifier: "en_US_POSIX")
         
         let weekDaySymbols = calendar.weekdaySymbols
         let indexOfDay = weekDaySymbols.index(of: day)
@@ -230,6 +248,12 @@ extension AlarmScheduler {
         let nextDay = calendar.nextDate(after: date,
                                         matching: matchingComponents,
                                         matchingPolicy:.nextTime)
-        return nextDay!
+        let timeToAdd = Calendar.current.dateComponents([.hour, .minute, .second], from: date)
+        
+        var nextDayWithTime = Calendar.current.date(byAdding: .hour, value: timeToAdd.hour!, to: nextDay!)!
+        nextDayWithTime = Calendar.current.date(byAdding: .minute, value: timeToAdd.minute!, to: nextDayWithTime)!
+        
+        
+        return nextDayWithTime
     }
 }

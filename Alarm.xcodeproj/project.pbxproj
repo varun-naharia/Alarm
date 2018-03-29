@@ -17,6 +17,7 @@
 		1A0FB7BD1CE18BB6006808D9 /* AlarmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0FB7BC1CE18BB6006808D9 /* AlarmController.swift */; };
 		1A0FB7BF1CE19229006808D9 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0FB7BE1CE19229006808D9 /* DateHelper.swift */; };
 		1A0FB7C71CE2DD56006808D9 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0FB7C61CE2DD56006808D9 /* SwitchTableViewCell.swift */; };
+		ABB5884A206D0866000D0F9E /* AlarmDurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB58849206D0866000D0F9E /* AlarmDurationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		1A0FB7BC1CE18BB6006808D9 /* AlarmController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmController.swift; sourceTree = "<group>"; };
 		1A0FB7BE1CE19229006808D9 /* DateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		1A0FB7C61CE2DD56006808D9 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
+		ABB58849206D0866000D0F9E /* AlarmDurationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmDurationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 			children = (
 				1A0FB7921CDD5235006808D9 /* AlarmListTableViewController.swift */,
 				1A0FB7941CDD5255006808D9 /* AlarmDetailTableViewController.swift */,
+				ABB58849206D0866000D0F9E /* AlarmDurationViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 			files = (
 				1A0FB7931CDD5235006808D9 /* AlarmListTableViewController.swift in Sources */,
 				1A0FB7C71CE2DD56006808D9 /* SwitchTableViewCell.swift in Sources */,
+				ABB5884A206D0866000D0F9E /* AlarmDurationViewController.swift in Sources */,
 				1A0FB77F1CDD4F07006808D9 /* AppDelegate.swift in Sources */,
 				1A0FB7951CDD5255006808D9 /* AlarmDetailTableViewController.swift in Sources */,
 				1A0FB7971CDD56B4006808D9 /* Alarm.swift in Sources */,
