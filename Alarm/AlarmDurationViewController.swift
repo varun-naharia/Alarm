@@ -48,6 +48,8 @@ class AlarmDurationViewController: UIViewController {
     @IBAction func saveAction(_ sender: UIBarButtonItem) {
         txtAlarmDuration.text = data[picker.selectedRow(inComponent: 0)]["Text"] as? String
         selectedTime = (data[picker.selectedRow(inComponent: 0)]["Value"] as? Int)!
+        AlarmController.shared.alarmDuration = (data[picker.selectedRow(inComponent: 0)]["Value"] as? Int)!
+        self.txtAlarmDuration.resignFirstResponder()
     }
 }
 
@@ -85,6 +87,7 @@ extension AlarmDurationViewController: UIPickerViewDelegate, UIPickerViewDataSou
     {
         
         txtAlarmDuration.text = data[picker.selectedRow(inComponent: 0)]["Text"] as? String
+        AlarmController.shared.alarmDuration = (data[picker.selectedRow(inComponent: 0)]["Value"] as? Int)!
         self.txtAlarmDuration.resignFirstResponder()
     }
 }

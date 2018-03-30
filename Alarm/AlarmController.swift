@@ -12,6 +12,7 @@ import UserNotifications
 class AlarmController {
     
     static let shared = AlarmController()
+    var alarmDuration:Int = 30
     
     init() {
         loadFromPersistentStorage()
@@ -106,15 +107,17 @@ extension AlarmScheduler {
         if(alarm.isSunOn)
         {
            // Sunday
+            for item in 0...AlarmController.shared.alarmDuration
+            {
+                let comingSunday =  findNext("Sunday", afterDate: fireDate.adding(minutes: item))
+                let triggerDate = Calendar.current.dateComponents([ .year, .month, .weekday, .hour, .minute, .second], from: comingSunday!)
+                let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: alarm.repeatAlarm)
 
-            let comingSunday =  findNext("Sunday", afterDate: fireDate)
-            let triggerDate = Calendar.current.dateComponents([ .year, .month, .weekday, .hour, .minute, .second], from: comingSunday!)
-            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: alarm.repeatAlarm)
-
-            let request = UNNotificationRequest(identifier: "\(alarm.uuid)0", content: notificationContent, trigger: trigger)
-            UNUserNotificationCenter.current().add(request) { (error) in
-                if let error = error {
-                    print("Unable to add notification request, \(error.localizedDescription)")
+                let request = UNNotificationRequest(identifier: "\(alarm.uuid)0\(item)", content: notificationContent, trigger: trigger)
+                UNUserNotificationCenter.current().add(request) { (error) in
+                    if let error = error {
+                        print("Unable to add notification request, \(error.localizedDescription)")
+                    }
                 }
             }
         }
@@ -122,15 +125,17 @@ extension AlarmScheduler {
         if(alarm.isMonOn)
         {
             // Monday
-
-            let comingMonday =  findNext("Monday", afterDate: fireDate)
-            let triggerDate = Calendar.current.dateComponents([ .year, .month, .weekday, .hour, .minute, .second], from: comingMonday!)
-            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: alarm.repeatAlarm)
-            
-            let request = UNNotificationRequest(identifier: "\(alarm.uuid)1", content: notificationContent, trigger: trigger)
-            UNUserNotificationCenter.current().add(request) { (error) in
-                if let error = error {
-                    print("Unable to add notification request, \(error.localizedDescription)")
+            for item in 0...AlarmController.shared.alarmDuration
+            {
+                let comingMonday =  findNext("Monday", afterDate: fireDate.adding(minutes: item))
+                let triggerDate = Calendar.current.dateComponents([ .year, .month, .weekday, .hour, .minute, .second], from: comingMonday!)
+                let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: alarm.repeatAlarm)
+                
+                let request = UNNotificationRequest(identifier: "\(alarm.uuid)1\(item)", content: notificationContent, trigger: trigger)
+                UNUserNotificationCenter.current().add(request) { (error) in
+                    if let error = error {
+                        print("Unable to add notification request, \(error.localizedDescription)")
+                    }
                 }
             }
         }
@@ -138,15 +143,17 @@ extension AlarmScheduler {
         if(alarm.isTueOn)
         {
             // Tuesday
+            for item in 0...AlarmController.shared.alarmDuration
+            {
+                let comingTuesday =  findNext("Tuesday", afterDate: fireDate.adding(minutes: item))
+                let triggerDate = Calendar.current.dateComponents([ .year, .month, .weekday, .hour, .minute, .second], from: comingTuesday!)
+                let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: alarm.repeatAlarm)
 
-            let comingTuesday =  findNext("Tuesday", afterDate: fireDate)
-            let triggerDate = Calendar.current.dateComponents([ .year, .month, .weekday, .hour, .minute, .second], from: comingTuesday!)
-            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: alarm.repeatAlarm)
-
-            let request = UNNotificationRequest(identifier: "\(alarm.uuid)2", content: notificationContent, trigger: trigger)
-            UNUserNotificationCenter.current().add(request) { (error) in
-                if let error = error {
-                    print("Unable to add notification request, \(error.localizedDescription)")
+                let request = UNNotificationRequest(identifier: "\(alarm.uuid)2\(item)", content: notificationContent, trigger: trigger)
+                UNUserNotificationCenter.current().add(request) { (error) in
+                    if let error = error {
+                        print("Unable to add notification request, \(error.localizedDescription)")
+                    }
                 }
             }
         }
@@ -154,15 +161,17 @@ extension AlarmScheduler {
         if(alarm.isWedOn)
         {
             // Wednesday
+            for item in 0...AlarmController.shared.alarmDuration
+            {
+                let comingWednesday =  findNext("Wednesday", afterDate: fireDate.adding(minutes: item))
+                let triggerDate = Calendar.current.dateComponents([ .year, .month, .weekday, .hour, .minute, .second], from: comingWednesday!)
+                let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: alarm.repeatAlarm)
 
-            let comingWednesday =  findNext("Wednesday", afterDate: fireDate)
-            let triggerDate = Calendar.current.dateComponents([ .year, .month, .weekday, .hour, .minute, .second], from: comingWednesday!)
-            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: alarm.repeatAlarm)
-
-            let request = UNNotificationRequest(identifier: "\(alarm.uuid)3", content: notificationContent, trigger: trigger)
-            UNUserNotificationCenter.current().add(request) { (error) in
-                if let error = error {
-                    print("Unable to add notification request, \(error.localizedDescription)")
+                let request = UNNotificationRequest(identifier: "\(alarm.uuid)3\(item)", content: notificationContent, trigger: trigger)
+                UNUserNotificationCenter.current().add(request) { (error) in
+                    if let error = error {
+                        print("Unable to add notification request, \(error.localizedDescription)")
+                    }
                 }
             }
         }
@@ -170,15 +179,17 @@ extension AlarmScheduler {
         if(alarm.isThuOn)
         {
             // Thrusday
+            for item in 0...AlarmController.shared.alarmDuration
+            {
+                let comingThursday =  findNext("Thursday", afterDate: fireDate.adding(minutes: item))
+                let triggerDate = Calendar.current.dateComponents([ .year, .month, .weekday, .hour, .minute, .second], from: comingThursday!)
+                let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: alarm.repeatAlarm)
 
-            let comingThursday =  findNext("Thursday", afterDate: fireDate)
-            let triggerDate = Calendar.current.dateComponents([ .year, .month, .weekday, .hour, .minute, .second], from: comingThursday!)
-            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: alarm.repeatAlarm)
-
-            let request = UNNotificationRequest(identifier: "\(alarm.uuid)4", content: notificationContent, trigger: trigger)
-            UNUserNotificationCenter.current().add(request) { (error) in
-                if let error = error {
-                    print("Unable to add notification request, \(error.localizedDescription)")
+                let request = UNNotificationRequest(identifier: "\(alarm.uuid)4\(item)", content: notificationContent, trigger: trigger)
+                UNUserNotificationCenter.current().add(request) { (error) in
+                    if let error = error {
+                        print("Unable to add notification request, \(error.localizedDescription)")
+                    }
                 }
             }
         }
@@ -187,14 +198,17 @@ extension AlarmScheduler {
         {
             // Friday
             
-            let comingFriday =  findNext("Friday", afterDate: fireDate)
-            let triggerDate = Calendar.current.dateComponents([ .year, .month, .weekday, .hour, .minute, .second], from: comingFriday!)
-            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: alarm.repeatAlarm)
-            
-            let request = UNNotificationRequest(identifier: "\(alarm.uuid)5", content: notificationContent, trigger: trigger)
-            UNUserNotificationCenter.current().add(request) { (error) in
-                if let error = error {
-                    print("Unable to add notification request, \(error.localizedDescription)")
+            for item in 0...AlarmController.shared.alarmDuration
+            {
+                let comingFriday =  findNext("Friday", afterDate: fireDate.adding(minutes: item))
+                let triggerDate = Calendar.current.dateComponents([ .year, .month, .weekday, .hour, .minute, .second], from: comingFriday!)
+                let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: alarm.repeatAlarm)
+                
+                let request = UNNotificationRequest(identifier: "\(alarm.uuid)5\(item)", content: notificationContent, trigger: trigger)
+                UNUserNotificationCenter.current().add(request) { (error) in
+                    if let error = error {
+                        print("Unable to add notification request, \(error.localizedDescription)")
+                    }
                 }
             }
         }
@@ -202,15 +216,17 @@ extension AlarmScheduler {
         if(alarm.isSatOn)
         {
              // Saturday
+            for item in 0...AlarmController.shared.alarmDuration
+            {
+                let comingSaturday = findNext("Saturday", afterDate: fireDate.adding(minutes: item))
+                let triggerDate = Calendar.current.dateComponents([ .year, .month, .weekday, .hour, .minute, .second], from: comingSaturday!)
+                let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: alarm.repeatAlarm)
 
-            let comingSaturday = findNext("Saturday", afterDate: fireDate)
-            let triggerDate = Calendar.current.dateComponents([ .year, .month, .weekday, .hour, .minute, .second], from: comingSaturday!)
-            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: alarm.repeatAlarm)
-
-            let request = UNNotificationRequest(identifier: "\(alarm.uuid)6", content: notificationContent, trigger: trigger)
-            UNUserNotificationCenter.current().add(request) { (error) in
-                if let error = error {
-                    print("Unable to add notification request, \(error.localizedDescription)")
+                let request = UNNotificationRequest(identifier: "\(alarm.uuid)6\(item)", content: notificationContent, trigger: trigger)
+                UNUserNotificationCenter.current().add(request) { (error) in
+                    if let error = error {
+                        print("Unable to add notification request, \(error.localizedDescription)")
+                    }
                 }
             }
         }
@@ -255,5 +271,11 @@ extension AlarmScheduler {
         
         
         return nextDayWithTime
+    }
+}
+
+extension Date {
+    func adding(minutes: Int) -> Date {
+        return Calendar.current.date(byAdding: .minute, value: minutes, to: self)!
     }
 }
